@@ -1,0 +1,88 @@
+extends layout
+
+block content
+  .breadcome-area
+    .container-fluid
+      .row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+          .breadcome-list
+            .row
+              .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                .breadcomb-wp
+                  .breadcomb-icon
+                    i.icon.nalika-home
+                  .breadcomb-ctn
+                    h2 Danh sách sản phẩm
+              .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                .breadcomb-report
+                  button.btn(data-toggle='tooltip', data-placement='left', title='Tải báo cáo')
+                    i.icon.nalika-download
+  .product-status.mg-b-30
+    .container-fluid
+      .row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+          .product-status-wrap
+            h4 Danh sách sản phẩm
+            .add-product
+              a(href='admin-product-add.html') Thêm sản phẩm
+            table
+              tr
+                th Số thứ tự
+                th Ảnh
+                th Tên sản phẩm
+                th Giá
+                th Số lượng kho
+                th Tuỳ chọn
+              - var stt = 0;
+              each product in products
+                - stt++;
+                tr
+                  td #{stt}
+                  td
+                    img(src=product.image, alt='')
+                  td #{product.name}
+                  td $#{product.price}
+                  td #{product.qtyInStock}
+                  td
+                    button.pd-setting-ed(data-toggle='tooltip', title='Sửa')
+                      a(href='admin-product-edit.html?_id='+product._id)
+                        i.fa.fa-pencil-square-o(aria-hidden='true')
+            .custom-pagination
+              ul.pagination
+                li.page-item
+                  a.page-link(href='admin-product-list.html?startPage='+((startPage==1)?1:startPage-1)+'&page='+((page==1)?1:page-1)) Trước
+
+                if page==startPage
+
+                  li.page-item
+                    a.page-link(href='admin-product-list.html?startPage='+startPage+'&page='+startPage, style='color: red;') #{startPage}
+                  
+                  li.page-item
+                    a.page-link(href='admin-product-list.html?startPage='+startPage+'&page='+(startPage+1)) #{startPage+1}
+                  
+                  li.page-item
+                    a.page-link(href='admin-product-list.html?startPage='+startPage+'&page='+(startPage+2)) #{startPage+2}
+                
+                else if page==startPage+1
+                  
+                  li.page-item
+                    a.page-link(href='admin-product-list.html?startPage='+startPage+'&page='+startPage) #{startPage}
+                  
+                  li.page-item
+                    a.page-link(href='admin-product-list.html?startPage='+startPage+'&page='+(startPage+1), style='color: red;') #{startPage+1}
+                  
+                  li.page-item
+                    a.page-link(href='admin-product-list.html?startPage='+startPage+'&page='+(startPage+2)) #{startPage+2}
+                
+                else
+                  
+                  li.page-item
+                    a.page-link(href='admin-product-list.html?startPage='+startPage+'&page='+startPage) #{startPage}
+                  
+                  li.page-item
+                    a.page-link(href='admin-product-list.html?startPage='+startPage+'&page='+(startPage+1)) #{startPage+1}
+                  
+                  li.page-item
+                    a.page-link(href='admin-product-list.html?startPage='+startPage+'&page='+(startPage+2), style='color: red;') #{startPage+2}
+                li.page-item
+                  a.page-link(href='admin-product-list.html?startPage='+(startPage+1)+'&page='+(page+1)) Sau

@@ -1,0 +1,72 @@
+extends layout
+  
+block content
+  .breadcome-area
+    .container-fluid
+      .row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+          .breadcome-list
+            .row
+              .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                .breadcomb-wp
+                  .breadcomb-icon
+                    i.icon.nalika-home
+                  .breadcomb-ctn
+                    h2 Doanh thu
+              .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                .breadcomb-report
+                  button.btn(data-toggle='tooltip', data-placement='left', title='Tải báo cáo')
+                    i.icon.nalika-download
+  .product-status.mg-b-30
+    .container-fluid
+      .row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+          .product-status-wrap
+            h4 Doanh thu
+            form#revenue-form(action='#', method='POST', style='color: white;')
+              if typeof(errors)!='undefined'
+                each error in errors
+                  .alert.alert-danger
+                    | #{error}
+              .row
+                .review-content-section
+                  .input-group.mg-b-pro-edt
+                    h5 Tiêu chí thống kê
+                    input.form-group(type='radio', name='typeRevenue', value='1', checked=true, onclick="document.getElementById('date').type='date'; document.getElementById('label-date').hidden=false; document.getElementById('month').type='hidden';document.getElementById('month-year').type='hidden';document.getElementById('label-month').hidden=true;document.getElementById('label-month-year').hidden=true;document.getElementById('year').type='hidden';document.getElementById('label-year').hidden=true;document.getElementById('time-from').type='hidden';document.getElementById('time-to').type='hidden';document.getElementById('label-time-from').hidden=true;document.getElementById('label-time-to').hidden=true;")
+                    | &nbsp;&nbsp;Ngày
+                    br
+                    input.form-group(type='radio', name='typeRevenue', value='2', onclick="document.getElementById('date').type='hidden';document.getElementById('label-date').hidden=true;document.getElementById('month').type='number';document.getElementById('month-year').type='number';document.getElementById('label-month').hidden=false;document.getElementById('label-month-year').hidden=false;document.getElementById('year').type='hidden';document.getElementById('label-year').hidden=true;document.getElementById('time-from').type='hidden';document.getElementById('time-to').type='hidden';document.getElementById('label-time-from').hidden=true;document.getElementById('label-time-to').hidden=true;") 
+                    | &nbsp;&nbsp;Tháng
+                    br
+                    input.form-group(type='radio', name='typeRevenue', value='3', onclick="document.getElementById('date').type='hidden';document.getElementById('label-date').hidden=true; document.getElementById('month').type='hidden';document.getElementById('month-year').type='hidden';document.getElementById('label-month').hidden=true;document.getElementById('label-month-year').hidden=true;document.getElementById('year').type='number';document.getElementById('label-year').hidden=false; document.getElementById('time-from').type='hidden';document.getElementById('time-to').type='hidden';document.getElementById('label-time-from').hidden=true;document.getElementById('label-time-to').hidden=true;") 
+                    | &nbsp;&nbsp;Năm
+                    br
+                    input.form-group(type='radio', name='typeRevenue', value='4', onclick="document.getElementById('date').type='hidden'; document.getElementById('label-date').hidden=true; document.getElementById('month').type='hidden';document.getElementById('month-year').type='hidden';document.getElementById('label-month').hidden=true;document.getElementById('label-month-year').hidden=true;document.getElementById('year').type='hidden';document.getElementById('label-year').hidden=true; document.getElementById('time-from').type='date';document.getElementById('time-to').type='date';document.getElementById('label-time-from').hidden=false;document.getElementById('label-time-to').hidden=false;") 
+                    | &nbsp;&nbsp;Bất kỳ
+                  .input-group.mg-b-pro-edt
+                    h5#label-date Nhập ngày
+                    input#date.form-control(type='date', placeholder='Nhập ngày', name='date')
+
+                    .row
+                      .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                        h5#label-month(hidden=true) Nhập tháng
+                        input#month.form-control(type='hidden', placeholder='Nhập tháng', name='month', pattern="[0-12]{2}", required)
+                      .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                        h5#label-month-year(hidden=true) Nhập năm
+                        input#month-year.form-control(type='hidden', placeholder='Nhập năm', name='monthYear', pattern="19[0-9]{2}", required)
+                    
+                    h5#label-year(hidden=true) Nhập năm
+                    input#year.form-control(type='hidden', placeholder='Nhập năm', name='year', pattern="19[0-9]{2}", required)
+
+                    .row
+                      .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                        h5#label-time-from(hidden=true) Nhập ngày bắt đầu
+                        input#time-from.form-control(type='hidden', placeholder='Nhập ngày bắt đầu', name='startDate')
+                      .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                        h5#label-time-to(hidden=true) Nhập ngày kết thúc
+                        input#time-to.form-control(type='hidden', placeholder='Nhập ngày kết thúc', name='endDate')
+              .row
+                .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                  .text-center.custom-pro-edt-ds
+                    button.btn.btn-ctl-bt.waves-effect.waves-light.m-r-10(type='submit')
+                      | Thống kê

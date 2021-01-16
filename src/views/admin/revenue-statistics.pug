@@ -1,0 +1,108 @@
+extends layout
+  
+block content
+  .breadcome-area
+    .container-fluid
+      .row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+          .breadcome-list
+            .row
+              .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                .breadcomb-wp
+                  .breadcomb-icon
+                    i.icon.nalika-home
+                  .breadcomb-ctn
+                    h2 Doanh thu theo tiêu chí
+              .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                .breadcomb-report
+                  button.btn(data-toggle='tooltip', data-placement='left', title='Tải báo cáo')
+                    i.icon.nalika-download
+  .single-product-tab-area.mg-b-30
+    .single-pro-review-area
+      .container-fluid
+        .row
+          .col-lg-12.col-md-12.col-sm-12.col-xs-12
+            .review-tab-pro-inner
+              ul#myTab3.tab-review-design
+                li(class=((typeof(errors)!='undefined'||success_msg!='')?'active':''))
+                  a(href='#description')
+                    i.icon.nalika-edit(aria-hidden='true')
+                    |  Thông tin doanh thu
+                li(class=((typeof(errors)=='undefined'&&success_msg=='')?'active':''))
+                  a(href='#reviews')
+                    i.icon.nalika-edit(aria-hidden='true')
+                    |  Các đơn hàng
+              #myTabContent.tab-content.custom-product-edit
+                #description(class='product-tab-list tab-pane fade'+((typeof(errors)!='undefined'||success_msg!='')?' active in':''))
+                  .row
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12(style='color: white;')
+                      .input-group.mg-b-pro-edt
+                        h5 Tổng doanh thu
+                        input.form-control(type='text', value='$'+totalRevenue, style='background-color: black;', disabled=true)
+                      .input-group.mg-b-pro-edt
+                        h5 Tổng số lượng sản phẩm bán được
+                        input.form-control(type='number', value=qtyRevenue, style='background-color: black;', disabled=true)
+                #reviews(class='product-tab-list tab-pane fade'+((typeof(errors)=='undefined'&&success_msg=='')?' active in':''))
+                  .row
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                      .product-status-wrap
+                        h4 Danh sách đơn hàng
+                        table
+                          tr
+                            th Số thứ tự
+                            th Mã đơn hàng
+                            th Email khách hàng
+                            th Địa chỉ
+                            th Tổng tiền
+                            th Ngày đặt
+                          - var stt = 0;
+                          each order in orders
+                            - stt++;
+                            tr
+                              td #{stt}
+                              td #{order._id}
+                              each customer in customers
+                                if order.customerId == (''+customer._id)
+                                  td #{customer.email}
+                                  td #{customer.address}
+                              td $#{order.total}
+                              td #{order.orderDate}
+                        .custom-pagination
+                          ul.pagination
+                            li.page-item
+                              a.page-link(href='admin-revenue-statistics.html?'+queryBefore+'&startPage='+((startPage==1)?1:startPage-1)+'&page='+((page==1)?1:page-1)) Trước
+
+                            if page==startPage
+
+                              li.page-item
+                                a.page-link(href='admin-revenue-statistics.html?'+queryBefore+'&startPage='+startPage+'&page='+startPage, style='color: red;') #{startPage}
+                              
+                              li.page-item
+                                a.page-link(href='admin-revenue-statistics.html?'+queryBefore+'&startPage='+startPage+'&page='+(startPage+1)) #{startPage+1}
+                              
+                              li.page-item
+                                a.page-link(href='admin-revenue-statistics.html?'+queryBefore+'&startPage='+startPage+'&page='+(startPage+2)) #{startPage+2}
+                            
+                            else if page==startPage+1
+                              
+                              li.page-item
+                                a.page-link(href='admin-revenue-statistics.html?'+queryBefore+'&startPage='+startPage+'&page='+startPage) #{startPage}
+                              
+                              li.page-item
+                                a.page-link(href='admin-revenue-statistics.html?'+queryBefore+'&startPage='+startPage+'&page='+(startPage+1), style='color: red;') #{startPage+1}
+                              
+                              li.page-item
+                                a.page-link(href='admin-revenue-statistics.html?'+queryBefore+'&startPage='+startPage+'&page='+(startPage+2)) #{startPage+2}
+                            
+                            else
+                              
+                              li.page-item
+                                a.page-link(href='admin-revenue-statistics.html?'+queryBefore+'&startPage='+startPage+'&page='+startPage) #{startPage}
+                              
+                              li.page-item
+                                a.page-link(href='admin-revenue-statistics.html?'+queryBefore+'&startPage='+startPage+'&page='+(startPage+1)) #{startPage+1}
+                              
+                              li.page-item
+                                a.page-link(href='admin-revenue-statistics.html?'+queryBefore+'&startPage='+startPage+'&page='+(startPage+2), style='color: red;') #{startPage+2}
+                            li.page-item
+                              a.page-link(href='admin-revenue-statistics.html?'+queryBefore+'&startPage='+(startPage+1)+'&page='+(page+1)) Sau

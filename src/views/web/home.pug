@@ -1,0 +1,259 @@
+extends layout
+
+block content
+  // Start Banner Area
+  section.banner-area
+    .container
+      .row.fullscreen.align-items-center.justify-content-start
+        .col-lg-12
+          .active-banner-slider.owl-carousel
+            // single-slide
+            .row.single-slide.align-items-center.d-flex
+              .col-lg-5.col-md-6
+                .banner-content
+                  h1
+                    | HÀNG MỚI VỀ
+                  .add-bag.d-flex.align-items-center
+                    a.add-btn(href='single-product.html?_id='+top12LastestProduct[0]._id) 
+                      span.lnr.lnr-cross
+                    span.add-text.text-uppercase Xem thêm
+              .col-lg-7
+                .banner-img
+                  img.img-fluid(src=top12LastestProduct[0].image, alt='')
+            // single-slide
+            .row.single-slide.align-items-center.d-flex
+              .col-lg-5.col-md-6
+                .banner-content
+                  h1
+                    | HÀNG BÁN CHẠY NHẤT
+                  .add-bag.d-flex.align-items-center
+                    a.add-btn(href='single-product.html?_id='+top12MostPopularProduct[0]._id)
+                      span.lnr.lnr-cross
+                    span.add-text.text-uppercase Xem thêm
+              .col-lg-7
+                .banner-img
+                  img.img-fluid(src=top12MostPopularProduct[0].image, alt='')
+  // End Banner Area
+
+  // Start Features Area
+  section.features-area.section_gap
+    .container
+      .row.features-inner
+        // single features
+        .col-lg-3.col-md-6.col-sm-6
+          .single-features
+            .f-icon
+              img(src='img/features/f-icon1.png', alt='')
+            h6 Giao hàng miễn phí
+            p Giao hàng miễn phí trên mọi đơn hàng
+        // single features
+        .col-lg-3.col-md-6.col-sm-6
+          .single-features
+            .f-icon
+              img(src='img/features/f-icon2.png', alt='')
+            h6 Chính sách hoàn trả
+            p Trả hàng khi sản phẩm có vấn đề
+        // single features
+        .col-lg-3.col-md-6.col-sm-6
+          .single-features
+            .f-icon
+              img(src='img/features/f-icon3.png', alt='')
+            h6 24/7 Hỗ trợ
+            p Luôn sẵn sàng giải đáp thắc mắc của khách hàng
+        // single features
+        .col-lg-3.col-md-6.col-sm-6
+          .single-features
+            .f-icon
+              img(src='img/features/f-icon4.png', alt='')
+            h6 Thanh toán an toàn
+            p Đảm bảo thanh toán được an toàn
+  // End Features Area
+
+  // Start Category Area
+  section.category-area
+    .container
+      .row.justify-content-center
+        .col-lg-8.col-md-12
+          .row
+            .col-lg-8.col-md-8
+              .single-deal
+                .overlay
+                img.img-fluid.w-100(src='img/category/c1.jpg', alt='')
+                a.img-pop-up(href='img/category/c1.jpg', target='_blank')
+                  .deal-details
+                    h6.deal-title Giày mùa thu
+            .col-lg-4.col-md-4
+              .single-deal
+                .overlay
+                img.img-fluid.w-100(src='img/category/c2.jpg', alt='')
+                a.img-pop-up(href='img/category/c2.jpg', target='_blank')
+                  .deal-details
+                    h6.deal-title Giày mùa mưa
+            .col-lg-4.col-md-4
+              .single-deal
+                .overlay
+                img.img-fluid.w-100(src='img/category/c3.jpg', alt='')
+                a.img-pop-up(href='img/category/c3.jpg', target='_blank')
+                  .deal-details
+                    h6.deal-title Giày hip hop
+            .col-lg-8.col-md-8
+              .single-deal
+                .overlay
+                img.img-fluid.w-100(src='img/category/c4.jpg', alt='')
+                a.img-pop-up(href='img/category/c4.jpg', target='_blank')
+                  .deal-details
+                    h6.deal-title Giày đi phượt
+        .col-lg-4.col-md-6
+          .single-deal
+            .overlay
+            img.img-fluid.w-100(src='img/category/c5.jpg', alt='')
+            a.img-pop-up(href='img/category/c5.jpg', target='_blank')
+              .deal-details
+                h6.deal-title Khuyến mãi cực sốc
+  // End Category Area
+
+  // Start Product Area
+  section.owl-carousel.active-product-area.section_gap
+    // single product slide
+    .single-product-slider
+      .container
+        .row.justify-content-center
+          .col-lg-6.text-center
+            .section-title
+              h1 Sản phẩm mới nhất
+              p
+                | Săn ngay!
+        .row
+          each product in top12LastestProduct
+            .col-lg-3.col-md-6
+              .single-product
+                a(href='single-product.html?_id='+product._id)
+                  img.img-fluid(src=product.image, alt='')
+                .product-details
+                  a(href='single-product.html?_id='+product._id)
+                    h6
+                      | #{product.name}
+                  .price
+                    h6 $#{product.price}
+                    h6.l-through $#{product.oldPrice}
+    // single product slide
+    .single-product-slider
+      .container
+        .row.justify-content-center
+          .col-lg-6.text-center
+            .section-title
+              h1 Sản phẩm phổ biến
+              p
+                | Săn ngay!
+        .row
+          each product in top12MostPopularProduct
+            .col-lg-3.col-md-6
+              .single-product
+                a(href='single-product.html?_id='+product._id)
+                  img.img-fluid(src=product.image, alt='')
+                .product-details
+                  a(href='single-product.html?_id='+product._id)
+                    h6
+                      | #{product.name}
+                  .price
+                    h6 $#{product.price}
+                    h6.l-through $#{product.oldPrice}
+  // End Product Area
+
+  // Start Exclusive Deal Area
+  section.exclusive-deal-area
+    .container-fluid
+      .row.justify-content-center.align-items-center
+        .col-lg-6.no-padding.exclusive-left
+          #clockdiv.row.clock_sec.clockdiv
+            .col-lg-12
+              h1 Ưu đãi hấp dẫn độc quyền sẽ sớm kết thúc!
+              p Mau mau rinh giày ngay về nhà kẻo hết
+            .col-lg-12
+              .row.clock-wrap
+                .col.clockinner1.clockinner
+                  h1.days 150
+                  span.smalltext Ngày
+                .col.clockinner.clockinner1
+                  h1.hours 23
+                  span.smalltext Giờ
+                .col.clockinner.clockinner1
+                  h1.minutes 47
+                  span.smalltext Phút
+                .col.clockinner.clockinner1
+                  h1.seconds 59
+                  span.smalltext Giây
+          a.primary-btn(href='shoes-stall.html') Đến của hàng ngay
+        .col-lg-6.no-padding.exclusive-right
+          .active-exclusive-product-slider
+            // single exclusive carousel
+            .single-exclusive-slider
+              img.img-fluid(src=top9MostDiscountProduct[0].image, alt='')
+              .product-details
+                .price
+                  h6 $#{top9MostDiscountProduct[0].price}
+                  h6.l-through $#{top9MostDiscountProduct[0].oldPrice}
+                h4
+                  | #{top9MostDiscountProduct[0].name}
+                .add-bag.d-flex.align-items-center.justify-content-center
+                  a.add-btn(href='single-product.html?_id='+top9MostDiscountProduct[0]._id)
+                    span.ti-bag
+                  span.add-text.text-uppercase Xem tại đây
+            // single exclusive carousel
+            .single-exclusive-slider
+              img.img-fluid(src=top9MostDiscountProduct[1].image, alt='')
+              .product-details
+                .price
+                  h6 $#{top9MostDiscountProduct[1].price}
+                  h6.l-through $#{top9MostDiscountProduct[1].oldPrice}
+                h4
+                  | #{top9MostDiscountProduct[1].name}
+                .add-bag.d-flex.align-items-center.justify-content-center
+                  a.add-btn(href='single-product.html?_id='+top9MostDiscountProduct[1]._id)
+                    span.ti-bag
+                  span.add-text.text-uppercase Xem tại đây
+  // End Exclusive Deal Area
+
+  // Start Brand Area
+  section.brand-area.section_gap
+    .container
+      .row
+        a.col.single-img(href='#')
+          img.img-fluid.d-block.mx-auto(src='img/brand/1.png', alt='')
+        a.col.single-img(href='#')
+          img.img-fluid.d-block.mx-auto(src='img/brand/2.png', alt='')
+        a.col.single-img(href='#')
+          img.img-fluid.d-block.mx-auto(src='img/brand/3.png', alt='')
+        a.col.single-img(href='#')
+          img.img-fluid.d-block.mx-auto(src='img/brand/4.png', alt='')
+        a.col.single-img(href='#')
+          img.img-fluid.d-block.mx-auto(src='img/brand/5.png', alt='')
+  // End Brand Area
+  
+  // Start Related-product Area
+  section.related-product-area.section_gap_bottom
+    .container
+      .row.justify-content-center
+        .col-lg-6.text-center
+          .section-title
+            h1 Ưu đãi trong tuần
+            p
+              | Tuần mua sắm
+      .row
+        .col-lg-9
+          .row
+            each product in top9MostDiscountProduct
+              .col-lg-4.col-md-4.col-sm-6.mb-20
+                .single-related-product.d-flex
+                  a(href='single-product.html?_id='+product._id)
+                    img(src=product.image, alt='', width='100')
+                  .desc
+                    a.title(href='single-product.html?_id='+product._id) #{product.name}
+                    .price
+                      h6 #{product.price}
+                      h6.l-through $#{product.oldPrice}
+        .col-lg-3
+          .ctg-right
+            a(href='#', target='_blank')
+              img.img-fluid.d-block.mx-auto(src='img/category/c5.jpg', alt='')
+  // End Related-product Area

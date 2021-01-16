@@ -1,0 +1,47 @@
+extends layout
+
+block content
+  // Start Banner Area
+  section.banner-area.organic-breadcrumb
+    .container
+      .breadcrumb-banner.d-flex.flex-wrap.align-items-center.justify-content-end
+        .col-first
+          h1 Theo dõi đơn hàng
+          nav.d-flex.align-items-center
+            a(href='home.html')
+              | Trang chủ
+              span.lnr.lnr-arrow-right
+            a(href='#') Theo dõi đơn hàng
+  // End Banner Area
+
+  // Start Tracking Box Area
+  section.tracking_box_area.section_gap
+    .container
+      .tracking_box_inner
+        .table-responsive
+          table.table
+            thead
+              tr
+                th(scope='col') Mã đơn hàng
+                th(scope='col') Ngày đặt
+                th(scope='col') Danh sách sản phẩm
+                th(scope='col') Tổng tiền
+                th(scope='col') Trạng thái đơn hàng
+            tbody
+              each order in orders
+                tr
+                  td
+                    p #{order._id}
+                  td
+                    p #{order.orderDate}
+                  td
+                    each orderDetail in orderDetails
+                      if orderDetail.orderId == (''+order._id)
+                        each product in products
+                          if orderDetail.productId == (''+product._id)
+                            p #{product.name}
+                  td
+                    p $#{order.total}
+                  td
+                    p #{order.status}
+  // End Tracking Box Area

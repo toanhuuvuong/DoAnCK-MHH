@@ -1,0 +1,176 @@
+extends layout
+
+block content
+  // Start Banner Area
+  section.banner-area.organic-breadcrumb
+    .container
+      .breadcrumb-banner.d-flex.flex-wrap.align-items-center.justify-content-end
+        .col-first
+          h1 Danh mục
+          nav.d-flex.align-items-center
+            a(href='home.html')
+              | Trang chủ
+              span.lnr.lnr-arrow-right
+            a(href='#')
+              | Danh mục
+  // End Banner Area
+
+  // Start Content Area
+  .container
+    .row
+      .col-xl-3.col-lg-4.col-md-5
+        .sidebar-filter.mt-50
+          .top-filter-head Bộ lọc sản phẩm
+          .common-filter
+            .head Nhãn hiệu
+            form(action='#')
+              ul
+                li.filter-list
+                  a(href='shoes-stall.html', style=(brandId==undefined)?'color: red;':'')
+                    label(for='All')
+                      | Tất cả
+                li.filter-list
+                  a(href='shoes-stall.html?brandId=5e0b00a61c9d44000022aa63', style=(brandId=="5e0b00a61c9d44000022aa63")?'color: red;':'')
+                    label(for='Nike')
+                      | Giày Nike
+                li.filter-list
+                  a(href='shoes-stall.html?brandId=5e0b00de1c9d44000022aa64', style=(brandId=="5e0b00de1c9d44000022aa64")?'color: red;':'')
+                    label(for='Adidas')
+                      | Giày Adidas
+                li.filter-list
+                  a(href='shoes-stall.html?brandId=5e0b00fb1c9d44000022aa65', style=(brandId=="5e0b00fb1c9d44000022aa65")?'color: red;':'')
+                    label(for='New Balance')
+                      | Giày New Balance
+                li.filter-list
+                  a(href='shoes-stall.html?brandId=5e0b016f1c9d44000022aa69', style=(brandId=="5e0b016f1c9d44000022aa69")?'color: red;':'')
+                    label(for='Vans')
+                      | Giày Vans
+                li.filter-list
+                  a(href='shoes-stall.html?brandId=5e0b017e1c9d44000022aa6a', style=(brandId=="5e0b017e1c9d44000022aa6a")?'color: red;':'')
+                    label(for='Puma')
+                      | Giày Puma
+                li.filter-list
+                  a(href='shoes-stall.html?brandId=5e0b018e1c9d44000022aa6b', style=(brandId=="5e0b018e1c9d44000022aa6b")?'color: red;':'')
+                    label(for='Converse')
+                      | Giày Converse
+                li.filter-list
+                  a(href='shoes-stall.html?brandId=5e0b01a61c9d44000022aa6c', style=(brandId=="5e0b01a61c9d44000022aa6c")?'color: red;':'')
+                    label(for='Balenciaga')
+                      | Giày Balenciaga
+          .common-filter
+            .head Giá
+            form(action='#')
+              ul
+                li.filter-list
+                  a(href='shoes-stall.html?'+((brandId==undefined)?'':'brandId='+brandId+'&')+'gte=0&lte=50'+((sort==undefined)?'':'&sort='+sort), style=(gte==0)?'color: red;':'')
+                    label(for='$50 trở xuống')
+                      | $50 trở xuống
+                li.filter-list
+                  a(href='shoes-stall.html?'+((brandId==undefined)?'':'brandId='+brandId+'&')+'gte=50&lte=100'+((sort==undefined)?'':'&sort='+sort), style=(gte==50)?'color: red;':'')
+                    label(for='$50 - $100')
+                      | $50 - $100
+                li.filter-list
+                  a(href='shoes-stall.html?'+((brandId==undefined)?'':'brandId='+brandId+'&')+'gte=100&lte=200'+((sort==undefined)?'':'&sort='+sort), style=(gte==100)?'color: red;':'')
+                    label(for='$100 - $200')
+                      | $100 - $200
+                li.filter-list
+                  a(href='shoes-stall.html?'+((brandId==undefined)?'':'brandId='+brandId+'&')+'gte=200&lte=500'+((sort==undefined)?'':'&sort='+sort), style=(gte==200)?'color: red;':'')
+                    label(for='$200 - $500')
+                      | $200 - $500
+                li.filter-list
+                  a(href='shoes-stall.html?'+((brandId==undefined)?'':'brandId='+brandId+'&')+'gte=500&lte=1000000'+((sort==undefined)?'':'&sort='+sort), style=(gte==500)?'color: red;':'')
+                    label(for='$500 trở lên')
+                      | $500 trở lên
+      .col-xl-9.col-lg-8.col-md-7
+        // Start Filter Bar
+        .filter-bar.d-flex.flex-wrap.align-items-center
+          .sorting
+            .dropdown.show
+              a#dropdownMenuLink.btn.rounded-0.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false', style='background-color:white;')
+                | Sắp xếp
+              .dropdown-menu(aria-labelledby='dropdownMenuLink')
+                a.dropdown-item(href='shoes-stall.html?'+((brandId==undefined)?'':'brandId='+brandId+'&')+((gte==undefined)?'':'gte='+gte+'&lte='+lte+'&')+'sort=1') Giá tăng dần
+                a.dropdown-item(href='shoes-stall.html?'+((brandId==undefined)?'':'brandId='+brandId+'&')+((gte==undefined)?'':'gte='+gte+'&lte='+lte+'&')+'sort=-1') Giá giảm dần
+        // End Filter Bar
+
+        // Start Best Seller
+        section.lattest-product-area.pb-40.category-list
+          .row
+            each product in products
+              .col-lg-3.col-md-6
+                .single-product
+                  a(href='single-product.html?_id='+product._id)
+                    img.img-fluid(src=product.image, alt='')
+                  .product-details
+                    a(href='single-product.html?_id='+product._id)
+                      h6
+                        | #{product.name}
+                    .price
+                      h6 $#{product.price}
+                      h6.l-through $#{product.oldPrice}
+        // End Best Seller
+
+        // Start Filter Bar
+        .filter-bar.d-flex.flex-wrap.align-items-center
+          .sorting.mr-auto
+          .pagination
+            a.prev-arrow(href='shoes-stall.html?'+((brandId==undefined)?'':'brandId='+brandId+'&')+((gte==undefined)?'':'gte='+gte+'&lte='+lte+'&')+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+((startPage==1)?1:startPage-1)+'&page='+((page==1)?1:page-1))
+              i.fa.fa-long-arrow-left(aria-hidden='true')
+            
+            if page==startPage
+
+              a.active(href='shoes-stall.html?'+((brandId==undefined)?'':'brandId='+brandId+'&')+((gte==undefined)?'':'gte='+gte+'&lte='+lte+'&')+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+startPage+'&page='+startPage) #{startPage}
+              
+              a(href='shoes-stall.html?'+((brandId==undefined)?'':'brandId='+brandId+'&')+((gte==undefined)?'':'gte='+gte+'&lte='+lte+'&')+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+startPage+'&page='+(startPage+1)) #{startPage+1}
+              
+              a(href='shoes-stall.html?'+((brandId==undefined)?'':'brandId='+brandId+'&')+((gte==undefined)?'':'gte='+gte+'&lte='+lte+'&')+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+startPage+'&page='+(startPage+2)) #{startPage+2}
+            
+            else if page==startPage+1
+              
+              a(href='shoes-stall.html?'+((brandId==undefined)?'':'brandId='+brandId+'&')+((gte==undefined)?'':'gte='+gte+'&lte='+lte+'&')+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+startPage+'&page='+startPage) #{startPage}
+              
+              a.active(href='shoes-stall.html?'+((brandId==undefined)?'':'brandId='+brandId+'&')+((gte==undefined)?'':'gte='+gte+'&lte='+lte+'&')+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+startPage+'&page='+(startPage+1)) #{startPage+1}
+              
+              a(href='shoes-stall.html?'+((brandId==undefined)?'':'brandId='+brandId+'&')+((gte==undefined)?'':'gte='+gte+'&lte='+lte+'&')+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+startPage+'&page='+(startPage+2)) #{startPage+2}
+            
+            else
+              
+              a(href='shoes-stall.html?'+((brandId==undefined)?'':'brandId='+brandId+'&')+((gte==undefined)?'':'gte='+gte+'&lte='+lte+'&')+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+startPage+'&page='+startPage) #{startPage}
+              
+              a(href='shoes-stall.html?'+((brandId==undefined)?'':'brandId='+brandId+'&')+((gte==undefined)?'':'gte='+gte+'&lte='+lte+'&')+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+startPage+'&page='+(startPage+1)) #{startPage+1}
+              
+              a.active(href='shoes-stall.html?'+((brandId==undefined)?'':'brandId='+brandId+'&')+((gte==undefined)?'':'gte='+gte+'&lte='+lte+'&')+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+startPage+'&page='+(startPage+2)) #{startPage+2}
+            
+            a.next-arrow(href='shoes-stall.html?'+((brandId==undefined)?'':'brandId='+brandId+'&')+((gte==undefined)?'':'gte='+gte+'&lte='+lte+'&')+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+(startPage+1)+'&page='+(page+1))
+              i.fa.fa-long-arrow-right(aria-hidden='true')
+        // End Filter Bar
+  // End Content Area
+
+  // Start Related-product Area
+  section.related-product-area.section_gap_bottom
+    .container
+      .row.justify-content-center
+        .col-lg-6.text-center
+          .section-title
+            p &nbsp;
+            h1 Ưu đãi trong tuần
+            p
+              | Tuần mua sắm
+      .row
+        .col-lg-9
+          .row
+            each product in top9MostDiscountProduct
+              .col-lg-4.col-md-4.col-sm-6.mb-20
+                .single-related-product.d-flex
+                  a(href='single-product.html?_id='+product._id)
+                    img(src=product.image, alt='', width='100')
+                  .desc
+                    a.title(href='single-product.html?_id='+product._id) #{product.name}
+                    .price
+                      h6 #{product.price}
+                      h6.l-through $#{product.oldPrice}
+        .col-lg-3
+          .ctg-right
+            a(href='#', target='_blank')
+              img.img-fluid.d-block.mx-auto(src='img/category/c5.jpg', alt='')
+  // End Related-product Area

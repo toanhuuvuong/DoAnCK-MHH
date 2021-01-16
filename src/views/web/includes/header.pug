@@ -1,0 +1,55 @@
+header.header_area.sticky-header
+  .main_menu
+    nav.navbar.navbar-expand-lg.navbar-light.main_box
+      .container
+        a.navbar-brand.logo_h(href='home.html')
+          img(src='img/logo.png', alt='')
+        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        #navbarSupportedContent.collapse.navbar-collapse.offset
+          ul.nav.navbar-nav.menu_nav.ml-auto
+            li.nav-item.active
+              a.nav-link(href='home.html') Trang chủ
+            li.nav-item.submenu.dropdown
+              a.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false') Danh mục sản phẩm
+              ul.dropdown-menu
+                li.nav-item
+                  a.nav-link(href='shoes-stall.html') Giày
+                li.nav-item
+                  a.nav-link(href='#') Nón
+            li.nav-item
+              a.nav-link(href='contact.html') Liên hệ
+            if process.env.DID_LOGIN == 'TRUE'
+              li.nav-item.submenu.dropdown
+                a.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                  span.ti-user
+                ul.dropdown-menu
+                  li.nav-item
+                    a.nav-link(href='update-account-info.html') Thông tin tài khoản
+                  li.nav-item
+                    a.nav-link(href='tracking.html') Theo dõi đơn hàng
+                  li.nav-item
+                    a.nav-link(href='update-account-password.html') Đổi mật khẩu
+                  li.nav-item
+                    a.nav-link(href='logout.html') Đăng xuất
+            else
+              li.nav-item
+                a.nav-link(href='login.html') Đăng nhập/đăng ký
+          ul.nav.navbar-nav.navbar-right
+            li.nav-item
+              a.cart(href='cart.html')
+                span.ti-bag
+            li.nav-item
+              button.search
+                span#search.lnr.lnr-magnifier
+  #search_input_box.search_input
+    .container
+      form.d-flex.justify-content-between
+        input#search_input.form-control(type='text', placeholder='Tìm kiếm tại đây', value='')
+        span &nbsp;&nbsp;&nbsp;&nbsp;
+        span.search
+          a#search_button.form-control.mt-2.lnr.lnr-magnifier(href='#', onclick="var a = document.getElementById('search_button'); a.setAttribute('href', 'search.html?key=' + document.getElementById('search_input').value); window.open(a.href, '_self'); return false;")
+        span &nbsp;&nbsp;&nbsp;&nbsp;
+        span#close_search.lnr.lnr-cross(title='Close Search')

@@ -1,0 +1,121 @@
+extends layout
+  
+block content
+  .breadcome-area
+    .container-fluid
+      .row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+          .breadcome-list
+            .row
+              .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                .breadcomb-wp
+                  .breadcomb-icon
+                    i.icon.nalika-home
+                  .breadcomb-ctn
+                    h2 Sửa gian hàng
+              .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                .breadcomb-report
+                  button.btn(data-toggle='tooltip', data-placement='left', title='Tải báo cáo')
+                    i.icon.nalika-download
+  .single-product-tab-area.mg-b-30
+    .single-pro-review-area
+      .container-fluid
+        .row
+          .col-lg-12.col-md-12.col-sm-12.col-xs-12
+            .review-tab-pro-inner
+              ul#myTab3.tab-review-design
+                li(class=((typeof(errors)!='undefined'||success_msg!='')?'active':''))
+                  a(href='#description')
+                    i.icon.nalika-edit(aria-hidden='true')
+                    |  Thông tin gian hàng
+                li(class=((typeof(errors)=='undefined'&&success_msg=='')?'active':''))
+                  a(href='#reviews')
+                    i.icon.nalika-edit(aria-hidden='true')
+                    |  Các sản phẩm
+              #myTabContent.tab-content.custom-product-edit
+                #description(class='product-tab-list tab-pane fade'+((typeof(errors)!='undefined'||success_msg!='')?' active in':''))
+                  .row
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                      form(action='#', method='POST')
+                        if typeof(errors)!='undefined'
+                          each error in errors
+                            .alert.alert-danger
+                              | #{error}
+                        if success_msg!=''
+                          .alert.alert-success
+                            | #{success_msg}
+                        .input-group.mg-b-pro-edt
+                          span.input-group-addon
+                            i.icon.nalika-edit(aria-hidden='true')
+                          input.form-control(type='text', placeholder='Tên gian hàng', name='name', value=(typeof(values)!='undefined') ? values.name : stall.name)
+                        .text-center.custom-pro-edt-ds
+                          button.btn.btn-ctl-bt.waves-effect.waves-light.m-r-10(type='submit', value='submit')
+                            | Cập nhật
+                #reviews(class='product-tab-list tab-pane fade'+((typeof(errors)=='undefined'&&success_msg=='')?' active in':''))
+                  .row
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                      .product-status-wrap
+                        h4 Danh sách sản phẩm thuộc gian hàng
+                        .add-product
+                          a(href='admin-product-add.html') Thêm sản phẩm
+                        table
+                          tr
+                            th Số thứ tự
+                            th Ảnh
+                            th Tên sản phẩm
+                            th Giá
+                            th Số lượng kho
+                            th Tuỳ chọn
+                          - var stt = 0;
+                          each product in products
+                            - stt++;
+                            tr
+                              td #{stt}
+                              td
+                                img(src=product.image, alt='')
+                              td #{product.name}
+                              td $#{product.price}
+                              td #{product.qtyInStock}
+                              td
+                                button.pd-setting-ed(data-toggle='tooltip', title='Sửa')
+                                  a(href='admin-product-edit.html?_id='+product._id)
+                                    i.fa.fa-pencil-square-o(aria-hidden='true')
+                        .custom-pagination
+                          ul.pagination
+                            li.page-item
+                              a.page-link(href='admin-stall-edit.html?_id='+stall._id+'&startPage='+((startPage==1)?1:startPage-1)+'&page='+((page==1)?1:page-1)) Trước
+
+                            if page==startPage
+
+                              li.page-item
+                                a.page-link(href='admin-stall-edit.html?_id='+stall._id+'&startPage='+startPage+'&page='+startPage, style='color: red;') #{startPage}
+                              
+                              li.page-item
+                                a.page-link(href='admin-stall-edit.html?_id='+stall._id+'&startPage='+startPage+'&page='+(startPage+1)) #{startPage+1}
+                              
+                              li.page-item
+                                a.page-link(href='admin-stall-edit.html?_id='+stall._id+'&startPage='+startPage+'&page='+(startPage+2)) #{startPage+2}
+                            
+                            else if page==startPage+1
+                              
+                              li.page-item
+                                a.page-link(href='admin-stall-edit.html?_id='+stall._id+'&startPage='+startPage+'&page='+startPage) #{startPage}
+                              
+                              li.page-item
+                                a.page-link(href='admin-stall-edit.html?_id='+stall._id+'&startPage='+startPage+'&page='+(startPage+1), style='color: red;') #{startPage+1}
+                              
+                              li.page-item
+                                a.page-link(href='admin-stall-edit.html?_id='+stall._id+'&startPage='+startPage+'&page='+(startPage+2)) #{startPage+2}
+                            
+                            else
+                              
+                              li.page-item
+                                a.page-link(href='admin-stall-edit.html?_id='+stall._id+'&startPage='+startPage+'&page='+startPage) #{startPage}
+                              
+                              li.page-item
+                                a.page-link(href='admin-stall-edit.html?_id='+stall._id+'&startPage='+startPage+'&page='+(startPage+1)) #{startPage+1}
+                              
+                              li.page-item
+                                a.page-link(href='admin-stall-edit.html?_id='+stall._id+'&startPage='+startPage+'&page='+(startPage+2), style='color: red;') #{startPage+2}
+                            li.page-item
+                              a.page-link(href='admin-stall-edit.html?_id='+stall._id+'&startPage='+(startPage+1)+'&page='+(page+1)) Sau

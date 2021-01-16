@@ -1,0 +1,54 @@
+extends layout
+
+block content
+  // Start Banner Area
+  section.banner-area.organic-breadcrumb
+    .container
+      .breadcrumb-banner.d-flex.flex-wrap.align-items-center.justify-content-end
+        .col-first
+          h1 Đăng nhập/đăng ký
+          nav.d-flex.align-items-center
+            a(href='home.html')
+              | Trang chủ
+              span.lnr.lnr-arrow-right
+            a(href='#') Đăng nhập/đăng ký
+  // End Banner Area
+  
+  // Start Login Box Area
+  section.login_box_area.section_gap
+    .container
+      .row
+        .col-lg-6
+          .login_box_img
+            img.img-fluid(src='img/login.jpg', alt='')
+            .hover
+              h4 Bạn là thành viên mới của website?
+              p
+                | Hãy đăng ký tài khoản để nhận ưu đãi!
+              a.primary-btn(href='registration.html') Tạo tài khoản
+        .col-lg-6
+          .login_form_inner
+            h3 Đăng nhập
+            form#contactForm.row.login_form(action='#', method='POST')
+              .col-md-12.form-group
+                if success_msg!=''
+                  .alert.alert-success
+                    | #{success_msg}
+                if error_msg!=''
+                  .alert.alert-danger
+                    | #{error_msg}
+                if error!=''
+                  .alert.alert-danger
+                    | #{error}
+              .col-md-12.form-group
+                input#name.form-control(type='email', name='email', placeholder='Email', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Email'")
+              .col-md-12.form-group
+                input#name.form-control(type='password', name='password', placeholder='Mật khẩu', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Mật khẩu'")
+              .col-md-12.form-group
+              .col-md-12.form-group
+              .col-md-12.form-group
+              .col-md-12.form-group
+                button.primary-btn(type='submit', value='submit') Đăng nhập
+                a(href='forgot-password.html') Quên mật khẩu?
+                a(href='admin-login.html', style='color: red;') Đăng nhập với tài khoản quản trị?
+  // End Login Box Area

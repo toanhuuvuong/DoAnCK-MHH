@@ -1,0 +1,86 @@
+extends layout
+
+block content
+  // Start Banner Area
+  section.banner-area.organic-breadcrumb
+    .container
+      .breadcrumb-banner.d-flex.flex-wrap.align-items-center.justify-content-end
+        .col-first
+          h1 Thanh toán
+          nav.d-flex.align-items-center
+            a(href='home.html')
+              | Trang chủ
+              span.lnr.lnr-arrow-right
+            a(href='#') Thanh toán
+  // End Banner Area
+  
+  // Start Checkout Area
+  section.checkout_area.section_gap
+    .container
+      .billing_details
+        .row
+          .col-lg-6
+            form.row.contact_form(action='#', method='POST')
+              .col-md-12.form-group
+                if typeof(errors)!='undefined'
+                    each error in errors
+                      .alert.alert-danger
+                        | #{error}
+              .col-md-12.form-group.p_star
+                h3 Có phiếu giảm giá? 
+                input#coupon.form-control(type='text', name='code', placeholder='Nhập mã giảm giá', value=(values.code) ? values.code : '')
+                input.form-control(type='text', name='discount', value=((discount!='') ? (''+discount) : '0'))
+                br
+                a#check-coupon.tp_btn(href='#', onclick="var a = document.getElementById('check-coupon'); a.setAttribute('href', 'checkout.html/check-coupon?code=' + document.getElementById('coupon').value); window.open(a.href, '_self'); return false;") Áp dụng giảm giá
+              .col-md-12.form-group.p_star
+                h3 Chi tiết thanh toán
+                input.form-control(type='text', name='name', placeholder='Họ tên', value=(values.name) ? values.name : '')
+              .col-md-12.form-group.p_star
+                input.form-control(type='tel', name='phone', pattern="0[0-9]{9}", required, placeholder='Số điện thoại', value=(values.phone) ? values.phone : '')
+              .col-md-12.form-group.p_star
+                input.form-control(type='text', name='address', placeholder='Địa chỉ giao hàng', value=(values.address) ? values.address : '')
+              .col-md-12.form-group
+                .creat_account
+                  h3 Chọn hình thức vận chuyển
+                  input.form-group(type='radio', name='shipType', value='veryFast', onclick="document.getElementById('shipCharge').innerHTML = '$' + 15; var totalPrice = parseInt(document.getElementById('totalPrice').name); var discount = parseInt(document.getElementById('discount').name); document.getElementById('total').innerHTML = '$' + (totalPrice + 15 - discount);") 
+                  | &nbsp;&nbsp;Giao hàng cấp tốc
+                  br
+                  input.form-group(type='radio', name='shipType', value='fast', onclick="document.getElementById('shipCharge').innerHTML = '$' + 10; var totalPrice = parseInt(document.getElementById('totalPrice').name); var discount = parseInt(document.getElementById('discount').name); document.getElementById('total').innerHTML = '$' + (totalPrice + 10 - discount);") 
+                  | &nbsp;&nbsp;Giao hàng nhanh
+                  br
+                  input.form-group(type='radio', name='shipType', value='normal', onclick="document.getElementById('shipCharge').innerHTML = '$' + 5; var totalPrice = parseInt(document.getElementById('totalPrice').name); var discount = parseInt(document.getElementById('discount').name); document.getElementById('total').innerHTML = '$' + (totalPrice + 5 - discount);") 
+                  | &nbsp;&nbsp;Giao hàng thường  
+              .col-md-12.form-group
+                button.primary-btn(type='submit', value='submit') Thanh toán
+          .col-lg-6
+            .order_box
+              h2 Đơn hàng của bạn
+              ul.list
+                li
+                  a(href='#')
+                    | Sản phẩm 
+                    span Tổng
+                each storedItem in storedItems
+                  li
+                    a(href='#')
+                      | #{storedItem.item.name}
+                      span.middle x #{storedItem.qty}
+                      span.last $#{storedItem.price}
+              ul.list.list_2
+                li
+                  a#totalPrice(href='#', name=(''+totalPrice))
+                    | Tổng phụ 
+                    span $#{totalPrice}
+                li
+                  a#discount(href='#', name=((discount!='') ? ('' + discount) : '0'))
+                    | Giảm giá
+                    span $#{((discount!='') ? discount : 0)}
+                li
+                  a(href='#')
+                    | Phí vận chuyển 
+                    span#shipCharge NaN
+                li
+                  a(href='#')
+                    | Tổng 
+                    span#total NaN              
+  // End Checkout Area

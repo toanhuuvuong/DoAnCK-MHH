@@ -1,0 +1,79 @@
+extends layout
+
+block content
+  // Start Banner Area
+  section.banner-area.organic-breadcrumb
+    .container
+      .breadcrumb-banner.d-flex.flex-wrap.align-items-center.justify-content-end
+        .col-first
+          h1 Giỏ hàng
+          nav.d-flex.align-items-center
+            a(href='home.html')
+              | Trang chủ
+              span.lnr.lnr-arrow-right
+            a(href='#') Giỏ hàng
+  // End Banner Area
+  
+  // Start Cart Area
+  section.cart_area
+    .container
+      .cart_inner
+        .table-responsive
+          form(action='#', method='POST')
+            table.table
+              thead
+                tr
+                  th(scope='col') Sản phẩm
+                  th(scope='col') Giá
+                  th(scope='col') Số lượng
+                  th(scope='col') Tổng tiền
+                  th(scope='col') Tuỳ chọn
+              tbody
+                each storedItem in storedItems
+                  tr
+                    td
+                      .media
+                        .d-flex
+                          img(src=storedItem.item.image, alt='', width='128px')
+                        .media-body
+                          p #{storedItem.item.name}
+                    td
+                      h5 #{storedItem.item.price}
+                    td
+                      .product_count
+                        input.form-control.input-text.qty(id=(''+storedItem.item._id), type='text', name='qtys', maxlength='12', value=(''+storedItem.qty), title='Quantity:')
+                        button.increase.items-count(onclick="var result = document.getElementById('" + storedItem.item._id + "'); var sst = result.value; if(!isNaN(sst)) result.value++; return false;", type='button')
+                          i.lnr.lnr-chevron-up
+                        button.reduced.items-count(onclick="var result = document.getElementById('" + storedItem.item._id + "'); var sst = result.value; if(!isNaN(sst) && sst > 1 ) result.value--; return false;", type='button')
+                          i.lnr.lnr-chevron-down
+                      //h5 #{storedItem.qty}
+                    td
+                      h5 #{storedItem.price}
+                    td
+                      a.primary-btn(href='/cart.html/remove-item?_id='+storedItem.item._id) Xoá
+                tr.bottom_button
+                  td
+                    button.gray_btn(type='submit', value='submit') Cập nhật giỏ hàng
+                  td
+                  td
+                  td
+                  td
+                  td
+                tr
+                  td
+                  td
+                  td
+                  td
+                    h5 Tổng phụ
+                  td
+                    h5 #{totalPrice}
+                tr.out_button_area
+                  td
+                  td
+                  td
+                  td
+                  td
+                    .checkout_btn_inner.d-flex.align-items-center
+                      a.gray_btn(href='home.html') Tiếp tục mua sắm
+                      a.primary-btn(href='checkout.html') Thanh toán
+  // End Cart Area

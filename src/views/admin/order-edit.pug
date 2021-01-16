@@ -1,0 +1,147 @@
+extends layout
+
+block content
+  .breadcome-area
+    .container-fluid
+      .row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+          .breadcome-list
+            .row
+              .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                .breadcomb-wp
+                  .breadcomb-icon
+                    i.icon.nalika-home
+                  .breadcomb-ctn
+                    h2 Sửa đơn hàng
+              .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                .breadcomb-report
+                  button.btn(data-toggle='tooltip', data-placement='left', title='Tải báo cáo')
+                    i.icon.nalika-download
+  .single-product-tab-area.mg-b-30
+    .single-pro-review-area
+      .container-fluid
+        .row
+          .col-lg-12.col-md-12.col-sm-12.col-xs-12
+            .review-tab-pro-inner
+              ul#myTab3.tab-review-design
+                li(class=((success_msg!='')?'active':''))
+                  a(href='#description')
+                    i.icon.nalika-edit(aria-hidden='true')
+                    |  Thông tin đơn hàng
+                li(class=((success_msg=='')?'active':''))
+                  a(href='#reviews')
+                    i.icon.nalika-edit(aria-hidden='true')
+                    |  Các vật phẩm
+              #myTabContent.tab-content.custom-product-edit
+                #description(class='product-tab-list tab-pane fade'+((success_msg!='')?' active in':''))
+                  form(action='#', method='POST', style='color: white;')
+                    if success_msg!=''
+                      .alert.alert-success
+                        | #{success_msg}
+                    .row
+                      .col-lg-6.col-md-6.col-sm-6.col-xs-12
+                        .review-content-section
+                          .input-group.mg-b-pro-edt
+                            h5 Email khách hàng
+                            input.form-control(type='email', placeholder='Email khách hàng', value=customer.email, disabled=true, style='background-color: black;')
+                          .input-group.mg-b-pro-edt
+                            h5 Mã giảm giá
+                            input.form-control(type='text', placeholder='Mã khuyến mãi', value=order.coupon, disabled=true, style='background-color: black;')
+                          .input-group.mg-b-pro-edt
+                            h5 Giảm giá
+                            input.form-control(type='text', placeholder='Giảm giá', value='$'+order.discount, disabled=true, style='background-color: black;')
+                          .input-group.mg-b-pro-edt
+                            h5 Phí vận chuyển
+                            input.form-control(type='text', placeholder='Phí vận chuyển', value='$'+order.shipCharge, disabled=true, style='background-color: black;')
+                          .input-group.mg-b-pro-edt
+                            h5 Tổng tiền
+                            input.form-control(type='text', placeholder='Tổng tiền', value='$'+order.total, disabled=true, style='background-color: black;')
+                      .col-lg-6.col-md-6.col-sm-6.col-xs-12
+                        .review-content-section
+                          .input-group.mg-b-pro-edt
+                            h5 Ngày đặt
+                            input.form-control(type='date', placeholder='Ngày đặt', value=order.orderDate, disabled=true, style='background-color: black;')
+                          .input-group.mg-b-pro-edt
+                              h5 Trạng thái đơn hàng
+                              input.form-group(type='radio', name='status', value='Chưa giao', checked=(order.status=='Chưa giao') ? true : false)
+                              | &nbsp;&nbsp;Chưa giao
+                              br
+                              input.form-group(type='radio', name='status', value='Đang giao', checked=(order.status=='Đang giao') ? true : false) 
+                              | &nbsp;&nbsp;Đang giao
+                              br
+                              input.form-group(type='radio', name='status', value='Đã giao', checked=(order.status=='Đã giao') ? true : false) 
+                              | &nbsp;&nbsp;Đã giao
+                          .input-group.mg-b-pro-edt
+                              h5 Huỷ đơn hàng
+                              input.form-group(type='radio', name='didDelete', value='true', checked=(order.didDelete) ? true : false)
+                              | &nbsp;&nbsp;Huỷ
+                              br
+                              input.form-group(type='radio', name='didDelete', value='false', checked=(!order.didDelete) ? true : false) 
+                              | &nbsp;&nbsp;Phục hồi
+                    .row
+                      .text-center.custom-pro-edt-ds
+                        button.btn.btn-ctl-bt.waves-effect.waves-light.m-r-10(type='submit', value='submit')
+                          | Cập nhật
+                #reviews(class='product-tab-list tab-pane fade'+((success_msg=='')?' active in':''))
+                  .row
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                      .product-status-wrap
+                        h4 Danh sách vật phẩm của đơn hàng
+                        table
+                          tr
+                            th Số thứ tự
+                            th Ảnh
+                            th Tên sản phẩm
+                            th Giá
+                            th Số lượng đặt
+                          - var stt = 0;
+                          each orderDetail in orderDetails
+                            - stt++;
+                            tr
+                              td #{stt}
+                              each product in products
+                                if orderDetail.productId==(product._id+'')
+                                  td
+                                    img(src=product.image, alt='')
+                                  td #{product.name}
+                                  td $#{product.price}
+                              td #{orderDetail.qty}
+                        .custom-pagination
+                          ul.pagination
+                            li.page-item
+                              a.page-link(href='admin-order-edit.html?_id='+order._id+'&startPage='+((startPage==1)?1:startPage-1)+'&page='+((page==1)?1:page-1)) Trước
+
+                            if page==startPage
+
+                              li.page-item
+                                a.page-link(href='admin-order-edit.html?_id='+order._id+'&startPage='+startPage+'&page='+startPage, style='color: red;') #{startPage}
+                              
+                              li.page-item
+                                a.page-link(href='admin-order-edit.html?_id='+order._id+'&startPage='+startPage+'&page='+(startPage+1)) #{startPage+1}
+                              
+                              li.page-item
+                                a.page-link(href='admin-order-edit.html?_id='+order._id+'&startPage='+startPage+'&page='+(startPage+2)) #{startPage+2}
+                            
+                            else if page==startPage+1
+                              
+                              li.page-item
+                                a.page-link(href='admin-order-edit.html?_id='+order._id+'&startPage='+startPage+'&page='+startPage) #{startPage}
+                              
+                              li.page-item
+                                a.page-link(href='admin-order-edit.html?_id='+order._id+'&startPage='+startPage+'&page='+(startPage+1), style='color: red;') #{startPage+1}
+                              
+                              li.page-item
+                                a.page-link(href='admin-order-edit.html?_id='+order._id+'&startPage='+startPage+'&page='+(startPage+2)) #{startPage+2}
+                            
+                            else
+                              
+                              li.page-item
+                                a.page-link(href='admin-order-edit.html?_id='+order._id+'&startPage='+startPage+'&page='+startPage) #{startPage}
+                              
+                              li.page-item
+                                a.page-link(href='admin-order-edit.html?_id='+order._id+'&startPage='+startPage+'&page='+(startPage+1)) #{startPage+1}
+                              
+                              li.page-item
+                                a.page-link(href='admin-order-edit.html?_id='+order._id+'&startPage='+startPage+'&page='+(startPage+2), style='color: red;') #{startPage+2}
+                            li.page-item
+                              a.page-link(href='admin-order-edit.html?_id='+order._id+'&startPage='+(startPage+1)+'&page='+(page+1)) Sau

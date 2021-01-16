@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  // Start Banner Area
+  section.banner-area.organic-breadcrumb
+    .container
+      .breadcrumb-banner.d-flex.flex-wrap.align-items-center.justify-content-end
+        .col-first
+          h1 Liên hệ
+          nav.d-flex.align-items-center
+            a(href='home.html')
+              | Trang chủ
+              span.lnr.lnr-arrow-right
+            a(href='#') Liên hệ
+  // End Banner Area
+  
+  // Start Contact Area
+  section.contact_area.section_gap_bottom
+    .container
+      #mapBox.mapBox(data-lat='40.701083', data-lon='-74.1522848', data-zoom='13', data-info='PO Box CT16122 Collins Street West, Victoria 8007, Australia.', data-mlat='40.701083', data-mlon='-74.1522848')
+      .row
+        .col-lg-12
+          .contact_info
+            .info_item
+              i.lnr.lnr-home
+              h6 HCM, Việt Nam
+              p VHT Shop
+            .info_item
+              i.lnr.lnr-phone-handset
+              h6
+                a(href='#') 0333386574
+              p 8AM - 5PM, Thứ 2 - Thứ 6
+            .info_item
+              i.lnr.lnr-envelope
+              h6
+                a(href='#') support@colorlib.com
+              p Gửi phản hồi cho chúng tôi bất cứ lúc nào bạn cần!
+  // End Contact Area

@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  .breadcome-area
+    .container-fluid
+      .row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+          .breadcome-list
+            .row
+              .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                .breadcomb-wp
+                  .breadcomb-icon
+                    i.icon.nalika-home
+                  .breadcomb-ctn
+                    h2 Top 10 sản phẩm có số lượng bán nhiều nhất của gian hàng
+              .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                .breadcomb-report
+                  button.btn(data-toggle='tooltip', data-placement='left', title='Tải báo cáo')
+                    i.icon.nalika-download
+  .product-status.mg-b-30
+    .container-fluid
+      .row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+          .product-status-wrap
+            h4 Top 10
+            table
+              tr
+                th Số thứ tự
+                th Ảnh
+                th Tên sản phẩm
+                th Gian hàng
+                th Số lượng bán
+              - var stt = 0;
+              each item in items
+                - stt++;
+                tr
+                  td #{stt}
+                  each product in products
+                    if (''+item._id) == (product._id+'')
+                      td
+                        img(src=product.image, alt='')
+                      td #{product.name}
+                  td #{stall.name}
+                  td #{item.qtySale}                                   

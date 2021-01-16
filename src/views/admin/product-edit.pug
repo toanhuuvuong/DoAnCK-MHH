@@ -1,0 +1,98 @@
+extends layout
+
+block content
+  .breadcome-area
+    .container-fluid
+      .row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+          .breadcome-list
+            .row
+              .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                .breadcomb-wp
+                  .breadcomb-icon
+                    i.icon.nalika-home
+                  .breadcomb-ctn
+                    h2 Sửa sản phẩm
+              .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                .breadcomb-report
+                  button.btn(data-toggle='tooltip', data-placement='left', title='Tải báo cáo')
+                    i.icon.nalika-download                      
+  .single-product-tab-area.mg-b-30
+    .single-pro-review-area
+      .container-fluid
+        .row
+          .col-lg-12.col-md-12.col-sm-12.col-xs-12
+            .review-tab-pro-inner
+              ul#myTab3.tab-review-design
+                li.active
+                  a(href='#description')
+                    i.icon.nalika-edit(aria-hidden='true')
+                    |  Thông tin sản phẩm
+              #myTabContent.tab-content.custom-product-edit
+                #description.product-tab-list.tab-pane.fade.active.in
+                  form#add-form(action='#', method='POST', style='color: white;', enctype='multipart/form-data')
+                    if typeof(errors)!='undefined'
+                      each error in errors
+                        .alert.alert-danger
+                          | #{error}
+                    if success_msg!=''
+                      .alert.alert-success
+                        | #{success_msg}
+                    .row
+                      .col-lg-6.col-md-6.col-sm-6.col-xs-12
+                        .review-content-section
+                          .input-group.mg-b-pro-edt
+                            h5 Gian hàng
+                            select.form-control.mg-b-pro-edt(form='add-form', name='stallId')
+                              option Gian hàng
+                              each stall in stalls
+                                option(value=(''+stall._id), selected=(((stall._id+'')==((typeof(values)!='undefined') ? values.stallId : product.stallId))?true:false)) #{stall.name}
+                          .input-group.mg-b-pro-edt
+                            h5 Nhãn hiệu
+                            select.form-control.mg-b-pro-edt(form='add-form', name='brandId')
+                              option Nhãn hiệu
+                              each brand in brands
+                                option(value=(''+brand._id), selected=(((brand._id+'')==((typeof(values)!='undefined') ? values.brandId : product.brandId))?true:false)) #{brand.name}
+                          .input-group.mg-b-pro-edt
+                            h5 Tên sản phẩm
+                            input.form-control(type='text', name='name', placeholder='Tên sản phẩm', value=(typeof(values)!='undefined') ? values.name : product.name)
+                          .input-group.mg-b-pro-edt
+                            h5 Ảnh
+                            input.form-control-file(type='file', name='image', value=(typeof(values)!='undefined') ? values.image : product.image)
+                          .input-group.mg-b-pro-edt
+                            h5 Giá bán
+                            input.form-control(type='number', name='oldPrice', placeholder='Giá bán', value=(typeof(values)!='undefined') ? values.oldPrice : product.oldPrice)
+                          .input-group.mg-b-pro-edt
+                            h5 Giá sau khi sale
+                            input.form-control(type='number', name='price', placeholder='Giá sau khi sale', value=(typeof(values)!='undefined') ? values.price : product.price)
+                          .input-group.mg-b-pro-edt(style='color: white;')
+                            input.form-group(type='radio', name='didDelete', value='true', checked=(product.didDelete) ? true : false)
+                            | &nbsp;&nbsp;Khoá
+                            br
+                            input.form-group(type='radio', name='didDelete', value='false', checked=(!product.didDelete) ? true : false) 
+                            | &nbsp;&nbsp;Mở
+                      .col-lg-6.col-md-6.col-sm-6.col-xs-12
+                        .review-content-section
+                          .input-group.mg-b-pro-edt
+                            h5 Số lượng trong kho
+                            input.form-control(type='number', name='qtyInStock', placeholder='Số lượng trong kho', value=(typeof(values)!='undefined') ? values.qtyInStock : product.qtyInStock)
+                          .input-group.mg-b-pro-edt
+                            h5 Số lượt xem sản phẩm
+                            input.form-control(type='number', name='numView', placeholder='Số lượt xem sản phẩm', value=product.numView, disabled=true, style='background-color: black;')
+                          .input-group.mg-b-pro-edt
+                            h5 Số lượt đánh giá
+                            input.form-control(type='number', name='numRate', placeholder='Số lượt đánh giá', value=product.numRate, disabled=true, style='background-color: black;')
+                          .input-group.mg-b-pro-edt
+                            h5 Điểm đánh giá
+                            input.form-control(type='number', name='ratingStar', placeholder='Điểm đánh giá', value=product.ratingStar, disabled=true, style='background-color: black;')
+                          .input-group.mg-b-pro-edt
+                            h5 Ngày tạo
+                            input.form-control(type='date', name='createdDate', placeholder='Ngày tạo', value=product.createdDate, disabled=true, style='background-color: black;')
+                          .input-group.mg-b-pro-edt
+                            h5 Mô tả
+                            input.form-control(name='description', placeholder='Mô tả', value=((typeof(values)!='undefined') ? values.description : product.description))
+                    .row
+                      .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                        .text-center.custom-pro-edt-ds
+                          button.btn.btn-ctl-bt.waves-effect.waves-light.m-r-10(type='submit')
+                            | Cập nhật

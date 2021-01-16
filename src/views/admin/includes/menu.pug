@@ -1,0 +1,78 @@
+.left-sidebar-pro
+  nav#sidebar
+    .sidebar-header
+      a(href='admin-home.html')
+        img.main-logo(src='img/logo/logo.png', alt='')
+      strong
+        img(src='img/logo/logosn.png', alt='')
+    .nalika-profile
+      .profile-dtl
+        h2
+          | #{process.env.ADMIN_NAME}
+      .profile-social-dtl
+        ul.dtl-social
+          li
+            a(href='#')
+              i.icon.nalika-facebook
+          li
+            a(href='#')
+              i.icon.nalika-twitter
+          li
+            a(href='#')
+              i.icon.nalika-linkedin
+    .left-custom-menu-adp-wrap.comment-scrollbar
+      nav.sidebar-nav.left-sidebar-menu-pro
+        ul#menu1.metismenu
+          li
+            a(title='Home', href='admin-home.html')
+              span.mini-sub-pro Trang chủ
+          li
+            a.has-arrow(href='admin-home.html')
+              i.icon.nalika-home.icon-wrap
+              span.mini-click-non Quản lý tài khoản
+            ul.submenu-angle(aria-expanded='true')
+              li
+                a(title='Account List', href='admin-account-list.html')
+                  span.mini-sub-pro Danh sách tài khoản
+          li
+            a.has-arrow(href='admin-home.html')
+              i.icon.nalika-home.icon-wrap
+              span.mini-click-non Quản lý gian hàng
+            ul.submenu-angle(aria-expanded='true')
+              li
+                a(title='Stall List', href='admin-stall-list.html')
+                  span.mini-sub-pro Danh sách gian hàng
+              li
+                a(title='Stall Add', href='admin-stall-add.html')
+                  span.mini-sub-pro Thêm gian hàng
+              li
+                a(title='Stall List', href='admin-brand-list.html')
+                  span.mini-sub-pro Danh sách nhãn hiệu
+              li
+                a(title='Stall List', href='admin-brand-add.html')
+                  span.mini-sub-pro Thêm nhãn hiệu
+              li
+                a(title='Stall List', href='admin-product-list.html')
+                  span.mini-sub-pro Danh sách sản phẩm
+              li
+                a(title='Stall List', href='admin-product-add.html')
+                  span.mini-sub-pro Thêm sản phẩm
+          li
+            a.has-arrow(href='admin-home.html')
+              i.icon.nalika-home.icon-wrap
+              span.mini-click-non Quản lý đơn hàng
+            ul.submenu-angle(aria-expanded='true')
+              li
+                a(title='Order List', href='admin-order-list.html')
+                  span.mini-sub-pro Danh sách đơn hàng
+          li
+            a.has-arrow(href='admin-home.html')
+              i.icon.nalika-home.icon-wrap
+              span.mini-click-non Thông kê
+            ul.submenu-angle(aria-expanded='true')
+              li
+                a(title='Revenue', href='admin-revenue.html')
+                  span.mini-sub-pro Doanh thu
+              li
+                a(title='Top 10 product', href='admin-top-10-product.html')
+                  span.mini-sub-pro Top 10 sản phẩm

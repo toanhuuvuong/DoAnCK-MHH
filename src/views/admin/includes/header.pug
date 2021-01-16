@@ -1,0 +1,40 @@
+.container-fluid
+  .row
+    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+      .logo-pro
+        a(href='admin-home.html')
+          img.main-logo(src='img/logo/logo.png', alt='')
+.header-advance-area
+  .header-top-area
+    .container-fluid
+      .row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+          .header-top-wraper
+            .row
+              .col-lg-1.col-md-0.col-sm-1.col-xs-12
+                .menu-switcher-pro
+                  button#sidebarCollapse.btn.bar-button-pro.header-drl-controller-btn.btn-info.navbar-btn(type='button')
+                    i.icon.nalika-menu-task
+              .col-lg-6.col-md-7.col-sm-6.col-xs-12
+                
+              .col-lg-5.col-md-5.col-sm-12.col-xs-12
+                .header-right-info
+                  ul.nav.navbar-nav.mai-top-nav.header-right-menu
+                    li.nav-item
+                      a.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                        i.icon.nalika-user
+                        span.admin-name Tài khoản
+                        i.icon.nalika-down-arrow.nalika-angle-dw
+                      ul.dropdown-header-top.author-log.dropdown-menu.animated.zoomIn(role='menu')
+                        li
+                          a(href='admin-update-admin-info.html')
+                            span.icon.nalika-user.author-log-ic
+                            |  Thông tin
+                        li
+                          a(href='admin-registration.html')
+                            span.icon.nalika-settings.author-log-ic
+                            |  Phân quyền
+                        li
+                          a(href='logout.html')
+                            span.icon.nalika-unlocked.author-log-ic
+                            |  Đăng xuất

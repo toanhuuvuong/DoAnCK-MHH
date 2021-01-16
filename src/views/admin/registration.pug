@@ -1,0 +1,82 @@
+extends layout
+  
+block content
+  .breadcome-area
+    .container-fluid
+      .row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+          .breadcome-list
+            .row
+              .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                .breadcomb-wp
+                  .breadcomb-icon
+                    i.icon.nalika-home
+                  .breadcomb-ctn
+                    h2 Phân quyền
+  .single-product-tab-area.mg-b-30
+    .single-pro-review-area
+      .container-fluid
+        .row
+          .col-lg-12.col-md-12.col-sm-12.col-xs-12
+            .review-tab-pro-inner
+              ul#myTab3.tab-review-design
+                li.active
+                  a(href='#description')
+                    i.icon.nalika-edit(aria-hidden='true')
+                    |  Thêm tài khoản quản trị
+                #myTabContent.tab-content.custom-product-edit
+                  #description.product-tab-list.tab-pane.fade.active.in
+                    .row
+                      .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                        form(action='#', method='POST', style='color: white;')
+                          .row
+                            if typeof(errors)!='undefined'
+                              each error in errors
+                                .alert.alert-danger
+                                  | #{error}
+                            if success_msg!=''
+                              .alert.alert-success
+                                | #{success_msg}
+                            if error_msg!=''
+                              .alert.alert-danger
+                                | #{error_msg}
+                            .input-group.mg-b-pro-edt
+                              span.input-group-addon
+                                i.icon.nalika-edit(aria-hidden='true')
+                              input.form-control(type='text', name='name', placeholder='Họ tên', value=(typeof(values)!='undefined') ? values.name : '')
+                            .input-group.mg-b-pro-edt
+                              span.input-group-addon
+                                i.icon.nalika-edit(aria-hidden='true')
+                              input.form-control(type='tel', name='phone', placeholder='Số điện thoại', value=(typeof(values)!='undefined') ? values.phone : '', pattern="0[0-9]{9}", required)
+                            .input-group.mg-b-pro-edt
+                              h5 Giới tính
+                              input.form-group(type='radio', name='gender', value='male', checked='')
+                              | &nbsp;&nbsp;Nam
+                              br
+                              input.form-group(type='radio', name='gender', value='female') 
+                              | &nbsp;&nbsp;Nữ
+                              br
+                              input.form-group(type='radio', name='gender', value='other') 
+                              | &nbsp;&nbsp;Khác
+                            .input-group.mg-b-pro-edt
+                              h5 Ngày sinh
+                              //span.input-group-addon
+                                i.icon.nalika-edit(aria-hidden='true')
+                              input.form-control(type='date', name='birth', placeholder='Ngày sinh', value=(typeof(values)!='undefined') ? values.birth : '')
+                            .input-group.mg-b-pro-edt
+                              span.input-group-addon
+                                i.icon.nalika-edit(aria-hidden='true')
+                              input.form-control(type='text', name='email', placeholder='Email', value=(typeof(values)!='undefined') ? values.email : '')
+                            .input-group.mg-b-pro-edt
+                              span.input-group-addon
+                                i.icon.nalika-edit(aria-hidden='true')
+                              input.form-control(type='password', name='password1', placeholder='Mật khẩu', value=(typeof(values)!='undefined') ? values.password1 : '')
+                            .input-group.mg-b-pro-edt
+                              span.input-group-addon
+                                i.icon.nalika-edit(aria-hidden='true')
+                              input.form-control(type='password', name='password2', placeholder='Nhập lại mật khẩu', value=(typeof(values)!='undefined') ? values.password2 : '')
+                          .row
+                            .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                              .text-center.custom-pro-edt-ds                          
+                                button.btn.btn-ctl-bt.waves-effect.waves-light.m-r-10(type='submit', value='submit')
+                                  | Thêm

@@ -1,0 +1,84 @@
+extends layout
+
+block content
+  // Start Banner Area
+  section.banner-area.organic-breadcrumb
+    .container
+      .breadcrumb-banner.d-flex.flex-wrap.align-items-center.justify-content-end
+        .col-first
+          h1 Tìm kiếm
+          nav.d-flex.align-items-center
+            a(href='home.html')
+              | Trang chủ
+              span.lnr.lnr-arrow-right
+            a(href='#')
+              | Tìm kiếm
+  // End Banner Area
+
+  // Start Show Result Area
+  .container
+    .row
+      .col-md-12
+        // Start Filter Bar
+        .filter-bar.d-flex.flex-wrap.align-items-center
+          .sorting
+            .dropdown.show
+              a#dropdownMenuLink.btn.rounded-0.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false', style='background-color:white;')
+                | Sắp xếp
+              .dropdown-menu(aria-labelledby='dropdownMenuLink')
+                a.dropdown-item(href='search.html?key='+key+'&sort=1') Giá tăng dần
+                a.dropdown-item(href='search.html?key='+key+'&sort=-1') Giá giảm dần
+        // End Filter Bar
+
+        // Start Best Seller
+        section.lattest-product-area.pb-40.category-list
+          .row
+            each product in products
+              .col-lg-3.col-md-6
+                .single-product
+                  a(href='single-product.html?_id='+product._id)
+                    img.img-fluid(src=product.image, alt='')
+                  .product-details
+                    a(href='single-product.html?_id='+product._id)
+                      h6
+                        | #{product.name}
+                    .price
+                      h6 $#{product.price}
+                      h6.l-through $#{product.oldPrice}     
+        // End Best Seller
+
+        // Start Filter Bar
+        .filter-bar.d-flex.flex-wrap.align-items-center
+          .sorting.mr-auto
+          .pagination
+            a.prev-arrow(href='search.html?key='+key+'&'+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+((startPage==1)?1:startPage-1)+'&page='+((page==1)?1:page-1))
+              i.fa.fa-long-arrow-left(aria-hidden='true')
+            
+            if page==startPage
+
+              a.active(href='search.html?key='+key+'&'+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+startPage+'&page='+startPage) #{startPage}
+              
+              a(href='search.html?key='+key+'&'+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+startPage+'&page='+(startPage+1)) #{startPage+1}
+              
+              a(href='search.html?key='+key+'&'+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+startPage+'&page='+(startPage+2)) #{startPage+2}
+            
+            else if page==startPage+1
+              
+              a(href='search.html?key='+key+'&'+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+startPage+'&page='+startPage) #{startPage}
+              
+              a.active(href='search.html?key='+key+'&'+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+startPage+'&page='+(startPage+1)) #{startPage+1}
+              
+              a(href='search.html?key='+key+'&'+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+startPage+'&page='+(startPage+2)) #{startPage+2}
+            
+            else
+              
+              a(href='search.html?key='+key+'&'+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+startPage+'&page='+startPage) #{startPage}
+              
+              a(href='search.html?key='+key+'&'+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+startPage+'&page='+(startPage+1)) #{startPage+1}
+              
+              a.active(href='search.html?key='+key+'&'+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+startPage+'&page='+(startPage+2)) #{startPage+2}
+            
+            a.next-arrow(href='search.html?key='+key+'&'+((sort==undefined)?'':'sort='+sort+'&')+'startPage='+(startPage+1)+'&page='+(page+1))
+              i.fa.fa-long-arrow-right(aria-hidden='true')
+        // End Filter Bar
+  // End Show Result Area

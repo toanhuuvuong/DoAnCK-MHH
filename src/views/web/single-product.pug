@@ -1,0 +1,263 @@
+extends layout
+  
+block content
+  // Start Banner Area
+  section.banner-area.organic-breadcrumb
+    .container
+      .breadcrumb-banner.d-flex.flex-wrap.align-items-center.justify-content-end
+        .col-first
+          h1 Chi tiết sản phẩm
+          nav.d-flex.align-items-center
+            a(href='home.html')
+              | Trang chủ
+              span.lnr.lnr-arrow-right
+            a(href='shoes-stall.html')
+              | Danh mục
+              span.lnr.lnr-arrow-right
+            a(href='#') Chi tiết sản phẩm
+  // End Banner Area
+
+  // Start Single Product Area
+  .product_image_area
+    .container
+      .row.s_product_inner
+        .col-lg-6
+          .s_Product_carousel
+            .single-prd-item
+              img.img-fluid(src=product.image, alt='')
+            .single-prd-item
+              img.img-fluid(src=product.image, alt='')
+        .col-lg-5.offset-lg-1
+          .s_product_text
+            h3 #{product.name}
+            h2 $#{product.price}
+            ul.list
+              li
+                a.active(href='#')
+                  span Nhãn hiệu
+                  |  : #{productBrand}
+              li
+                a.active(href='#')
+                  if product.qtyInStock <= 0
+                    span Tình trạng
+                    |  : Hết hàng
+                  else if product.qtyInStock <= 500
+                    span Tình trạng
+                    |  : Còn ít hàng
+                  else
+                    span Tình trạng
+                    |  : Còn hàng
+              li
+                a.active(href='#')
+                  span Lượt xem
+                  |  : #{product.numView}
+            p
+              | #{product.description}
+            .product_count
+              label(for='qty') Số lượng:
+              input#sst.input-text.qty(type='text', name='qty', maxlength='12', value='1', title='Quantity:')
+              button.increase.items-count(onclick="var result = document.getElementById('sst'); var sst = result.value; if(!isNaN(sst)) result.value++;return false;", type='button')
+                i.lnr.lnr-chevron-up
+              button.reduced.items-count(onclick="var result = document.getElementById('sst'); var sst = result.value; if(!isNaN(sst) && sst > 1) result.value--;return false;", type='button')
+                i.lnr.lnr-chevron-down
+            .card_area.d-flex.align-items-center
+              a#add-to-cart.primary-btn(href='#', name=(''+product._id), onclick="var a = document.getElementById('add-to-cart'); a.setAttribute('href', 'single-product.html/add-to-cart?_id=' + a.name + '&qty=' + document.getElementById('sst').value); window.open(a.href, '_self'); return false;") Thêm vào giỏ
+              
+  // End Single Product Area
+
+  // Start Product Description Area 
+  section.product_description_area
+    .container
+      ul#myTab.nav.nav-tabs(role='tablist')
+        li.nav-item
+          a#home-tab.nav-link(data-toggle='tab', href='#home', role='tab', aria-controls='home', aria-selected='true') Mô tả
+        li.nav-item
+          a#profile-tab.nav-link(data-toggle='tab', href='#profile', role='tab', aria-controls='profile', aria-selected='false') Đặc điểm
+        li.nav-item
+          a#review-tab.nav-link.active(data-toggle='tab', href='#review', role='tab', aria-controls='review', aria-selected='false') Đánh giá
+      #myTabContent.tab-content
+        #home.tab-pane.fade(role='tabpanel', aria-labelledby='home-tab')
+          p #{product.description}
+        #profile.tab-pane.fade(role='tabpanel', aria-labelledby='profile-tab')
+          .table-responsive
+            table.table
+              tbody
+                tr
+                  td
+                    h5 Ngày ra mắt
+                  td
+                    h5 #{product.createdDate}
+                tr
+                  td
+                    h5 Số lượng trong kho
+                  td
+                    h5 #{product.qtyInStock}
+                tr
+                  td
+                    h5 Tình trạng
+                  td
+                    if product.qtyInStock <= 0
+                      h5 Hết hàng
+                    else if product.qtyInStock <= 500
+                      h5 Còn ít hàng
+                    else
+                      h5 Còn hàng                 
+        #review.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='review-tab')
+          .row
+            .col-lg-6
+              .row.total_rate
+                .col-6
+                  .box_total
+                    h5 Tổng thể
+                    h4 #{Number(product.ratingStar).toFixed(2)}
+                    h6 (#{product.numRate} Đánh giá)
+                .col-6
+                  .rating_list
+                    h3 Dựa trên #{product.numRate} đánh giá
+                    ul.list
+                      li
+                        a(href='#')
+                          | #{parseInt(product.ratingStar)} Sao 
+                          - for(var j = 1; j <= parseInt(product.ratingStar); j++)
+                            i.fa.fa-star
+              br
+              .review_list
+                each review in reviews
+                  .review_item
+                    .media
+                      .d-flex
+                        img(src='img/product/review-1.png', alt='')
+                      .media-body
+                        h4 #{review.name}
+                        - for(var j = 1; j <= review.rating; j++)
+                            i.fa.fa-star
+                  p
+                    | #{review.comment}
+              .filter-bar.d-flex.flex-wrap.align-items-center
+                .sorting.mr-auto
+                .pagination
+                  a.prev-arrow(href='single-product.html?_id='+product._id+'&startPage='+((startPage==1)?1:startPage-1)+'&page='+((page==1)?1:page-1))
+                    i.fa.fa-long-arrow-left(aria-hidden='true')
+                  
+                  if page==startPage
+
+                    a.active(href='single-product.html?_id='+product._id+'&startPage='+startPage+'&page='+startPage) #{startPage}
+                    
+                    a(href='single-product.html?_id='+product._id+'&startPage='+startPage+'&page='+(startPage+1)) #{startPage+1}
+                    
+                    a(href='single-product.html?_id='+product._id+'&startPage='+startPage+'&page='+(startPage+2)) #{startPage+2}
+                  
+                  else if page==startPage+1
+                    
+                    a(href='single-product.html?_id='+product._id+'&startPage='+startPage+'&page='+startPage) #{startPage}
+                    
+                    a.active(href='single-product.html?_id='+product._id+'&startPage='+startPage+'&page='+(startPage+1)) #{startPage+1}
+                    
+                    a(href='single-product.html?_id='+product._id+'&startPage='+startPage+'&page='+(startPage+2)) #{startPage+2}
+                  
+                  else
+                    
+                    a(href='single-product.html?_id='+product._id+'&startPage='+startPage+'&page='+startPage) #{startPage}
+                    
+                    a(href='single-product.html?_id='+product._id+'&startPage='+startPage+'&page='+(startPage+1)) #{startPage+1}
+                    
+                    a.active(href='single-product.html?_id='+product._id+'&startPage='+startPage+'&page='+(startPage+2)) #{startPage+2}
+                  
+                  a.next-arrow(href='single-product.html?_id='+product._id+'&startPage='+(startPage+1)+'&page='+(page+1))
+                    i.fa.fa-long-arrow-right(aria-hidden='true')
+            .col-lg-6
+              .review_box
+                h4 Thêm đánh giá
+                form#contactForm.row.contact_form(action=('#'), method='POST')
+                  .col-md-12
+                    h6 Viết bình luận
+                  if typeof(errors)!='undefined'
+                    each error in errors
+                      .col-md-12
+                        .form-group
+                          .alert.alert-danger
+                            | #{error}
+                  if success_msg!=''
+                    .col-md-12
+                      .form-group
+                        .alert.alert-success
+                          | #{success_msg}
+                  if process.env.DID_LOGIN != 'TRUE'
+                    .col-md-12
+                      .form-group
+                        input#email.form-control(type='email', name='email', placeholder='Email', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Email'", value=(typeof(values)!='undefined') ? values.email : '')
+                    .col-md-12
+                      .form-group
+                        input#name.form-control(type='text', name='name', placeholder='Họ tên', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Họ tên'", value=(typeof(values)!='undefined') ? values.name : '')
+                  .col-md-12
+                    .form-group
+                      textarea#message.form-control(name='comment', rows='1', placeholder='Nội dung', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Nội dung'", value=(typeof(values)!='undefined') ? values.comment : '')
+                  .col-md-12
+                    h6 Đánh giá của bạn về độ nổi bật
+                  .col-md-12
+                    input.form-group(type='radio', name='rating', value='5', checked=(typeof(values)!='undefined'&&values.rating=='5') ? true : false)
+                    span.rating_list
+                      ul.list
+                        li
+                          a(href='#')
+                            - for(var j = 1; j <= 5; j++)
+                              i.fa.fa-star
+                    br
+                    input.form-group(type='radio', name='rating', value='4', checked=(typeof(values)!='undefined'&&values.rating=='4') ? true : false) 
+                    span.rating_list
+                      ul.list
+                        li
+                          a(href='#')
+                            - for(var j = 1; j <= 4; j++)
+                              i.fa.fa-star
+                    br
+                    input.form-group(type='radio', name='rating', value='3', checked=(typeof(values)!='undefined'&&values.rating=='3') ? true : false) 
+                    span.rating_list
+                      ul.list
+                        li
+                          a(href='#')
+                            - for(var j = 1; j <= 3; j++)
+                              i.fa.fa-star
+                    br
+                    input.form-group(type='radio', name='rating', value='2', checked=(typeof(values)!='undefined'&&values.rating=='2') ? true : false) 
+                    span.rating_list
+                      ul.list
+                        li
+                          a(href='#')
+                            - for(var j = 1; j <= 2; j++)
+                              i.fa.fa-star
+                    br
+                    input.form-group(type='radio', name='rating', value='1', checked=(typeof(values)!='undefined'&&values.rating=='1') ? true : false) 
+                    span.rating_list
+                      ul.list
+                        li
+                          a(href='#')
+                            - for(var j = 1; j <= 1; j++)
+                              i.fa.fa-star
+                  .col-md-12.text-right
+                    button.primary-btn(type='submit', value='submit') Gửi
+  // End Product Description Area
+
+  // Start Related-product Area
+  section.related-product-area.section_gap_bottom
+    .container
+      .row.justify-content-center
+        .col-lg-6.text-center
+          .section-title
+            h1 Các sản phẩm liên quan
+            p
+              | Mua ngay kẻo lỡ!
+      .row
+        .col-lg-12
+          .row
+            each product in top9MostRelatedProduct
+              .col-lg-4.col-md-4.col-sm-6.mb-20
+                .single-related-product.d-flex
+                  a(href='single-product.html?_id='+product._id)
+                    img(src=product.image, alt='', width='100')
+                  .desc
+                    a.title(href='single-product.html?_id='+product._id) #{product.name}
+                    .price
+                      h6 #{product.price}
+                      h6.l-through $#{product.oldPrice}
+  // End Related-product Area

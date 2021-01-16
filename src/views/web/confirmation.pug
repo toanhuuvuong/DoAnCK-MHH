@@ -1,0 +1,99 @@
+extends layout
+
+block content
+  // Start Banner Area
+  section.banner-area.organic-breadcrumb
+    .container
+      .breadcrumb-banner.d-flex.flex-wrap.align-items-center.justify-content-end
+        .col-first
+          h1 Xác nhận
+          nav.d-flex.align-items-center
+            a(href='home.html')
+              | Trang chủ
+              span.lnr.lnr-arrow-right
+            a(href='#') Xác nhận
+  // End Banner Area
+  
+  // Start Order Details Area
+  section.order_details.section_gap
+    .container
+      h3.title_confirmation Cảm ơn bạn. Đơn đặt hàng của bạn đã được nhận!
+      .row.order_d_inner
+        .col-lg-6
+          .details_item
+            h4 Thông tin đơn hàng
+            ul.list
+              li
+                a(href='#')
+                  span Mã đơn hàng
+                  |  : #{order._id}
+              li
+                a(href='#')
+                  span Ngày đặt
+                  |  : #{order.orderDate}
+              li
+                a(href='#')
+                  span Tổng tiền
+                  |  : $#{totalPrice + order.shipCharge - order.discount}
+        .col-lg-6
+          .details_item
+            h4 Thông tin khách hàng
+            ul.list
+              li
+                a(href='#')
+                  span Họ tên
+                  |  : #{customer.name}
+              li
+                a(href='#')
+                  span Số điện thoại
+                  |  : #{customer.phone}
+              li
+                a(href='#')
+                  span Địa chỉ
+                  |  : #{customer.address}
+      .order_details_table
+        h2 Chi tiết đơn hàng
+        .table-responsive
+          table.table
+            thead
+              tr
+                th(scope='col') Sản phẩm
+                th(scope='col') Số lượng
+                th(scope='col') Tổng
+            tbody
+              each storedItem in storedItems
+                tr
+                  td
+                    p #{storedItem.item.name}
+                  td
+                    h5 x #{storedItem.qty}
+                  td
+                    p $#{storedItem.price}
+              tr
+                td
+                  h4 Tổng phụ
+                td
+                  h5
+                td
+                  p $#{totalPrice}
+              tr
+                td
+                  h4 Giảm giá
+                td
+                  h5
+                td
+                  p $#{order.discount}
+              tr
+                td
+                  h4 Vận chuyển
+                td
+                  h5
+                td
+                  p $#{order.shipCharge}
+              tr
+                td
+                  h4 Tổng
+                td
+                  h5
+                td
+                  p $#{totalPrice + order.shipCharge - order.discount}

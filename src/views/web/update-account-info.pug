@@ -1,0 +1,63 @@
+extends layout
+
+block content
+  // Start Banner Area
+  section.banner-area.organic-breadcrumb
+    .container
+      .breadcrumb-banner.d-flex.flex-wrap.align-items-center.justify-content-end
+        .col-first
+          h1 Thông tin tài khoản
+          nav.d-flex.align-items-center
+            a(href='home.html')
+              | Trang chủ
+              span.lnr.lnr-arrow-right
+            a(href='#')
+              | Thông tin tài khoản
+              span.lnr.lnr-arrow-right
+  // End Banner Area
+
+  // Start Box Area
+  section.login_box_area.section_gap
+    .container  
+      .row
+        .col-lg-12
+          .login_form_inner
+            h3 Thông tin tài khoản
+            form#contactForm.row.login_form(action='#', method='POST')
+              .col-md-12.form-group
+                if typeof(errors)!='undefined'
+                  each error in errors
+                    .alert.alert-danger
+                      | #{error}
+                if success_msg!=''
+                  .alert.alert-success
+                    | #{success_msg}
+                if error_msg!=''
+                  .alert.alert-danger
+                    | #{error_msg}
+              .col-lg-12.form-group
+                span 
+                  h5.text-left Họ tên
+                input.form-control(type='text', name='name', value=(typeof(values)!='undefined') ? values.name : '') 
+              .col-md-12.form-group
+                h5.text-left Số điện thoại
+                input.form-control(type='tel', name='phone', value=(typeof(values)!='undefined') ? values.phone : '', pattern="0[0-9]{9}", required, disabled)
+              .col-md-12.text-left
+                h5.text-left Giới tính
+                input.form-group(type='radio', name='gender', value='male', checked=(values.gender=='male') ? true : false)
+                | &nbsp;&nbsp;Nam
+                br
+                input.form-group(type='radio', name='gender', value='female', checked=(values.gender=='female') ? true : false) 
+                | &nbsp;&nbsp;Nữ
+                br
+                input.form-group(type='radio', name='gender', value='other', checked=(values.gender=='other') ? true : false) 
+                | &nbsp;&nbsp;Khác
+              .col-md-12.form-group
+                h5.text-left Ngày sinh
+                input.form-control(type='date', name='birth', value=(typeof(values)!='undefined') ? values.birth : '')
+              .col-md-12.form-group
+                h5.text-left Email
+                input.form-control(type='email', name='email', value=(typeof(values)!='undefined') ? values.email : '', disabled)
+              .col-md-12.form-group
+                button.primary-btn(type='submit', value='submit') Cập nhật
+  // End Box Area

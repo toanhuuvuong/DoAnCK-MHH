@@ -1,0 +1,129 @@
+extends layout
+
+block content
+  .breadcome-area
+    .container-fluid
+      .row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+          .breadcome-list
+            .row
+              .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                .breadcomb-wp
+                  .breadcomb-icon
+                    i.icon.nalika-home
+                  .breadcomb-ctn
+                    h2 Bảng điều khiển
+              .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                .breadcomb-report
+                  button.btn(data-toggle='tooltip', data-placement='left', title='Tải báo cáo')
+                    i.icon.nalika-download
+  .section-admin.container-fluid
+    .row.admin.text-center
+      .col-md-12
+        .row
+          .col-lg-3.col-md-3.col-sm-3.col-xs-12
+            .admin-content.analysis-progrebar-ctn.res-mg-t-15
+              h4.text-left.text-uppercase
+                b Đơn hàng
+              .row.vertical-center-box.vertical-center-box-tablet
+                .col-xs-3.mar-bot-15.text-left
+                  label.label.bg-green
+                    | 30% 
+                    i.fa.fa-level-up(aria-hidden='true')
+                .col-xs-9.cus-gh-hd-pro
+                  h2.text-right.no-margin 10,000
+              .progress.progress-mini
+                .progress-bar.bg-green(style='width: 78%;')
+          .col-lg-3.col-md-3.col-sm-3.col-xs-12(style='margin-bottom:1px;')
+            .admin-content.analysis-progrebar-ctn.res-mg-t-30
+              h4.text-left.text-uppercase
+                b Khấu trừ thuế
+              .row.vertical-center-box.vertical-center-box-tablet
+                .text-left.col-xs-3.mar-bot-15
+                  label.label.bg-red
+                    | 15% 
+                    i.fa.fa-level-down(aria-hidden='true')
+                .col-xs-9.cus-gh-hd-pro
+                  h2.text-right.no-margin 5,000
+              .progress.progress-mini
+                .progress-bar.progress-bar-danger.bg-red(style='width: 38%;')
+          .col-lg-3.col-md-3.col-sm-3.col-xs-12
+            .admin-content.analysis-progrebar-ctn.res-mg-t-30
+              h4.text-left.text-uppercase
+                b Doanh thu
+              .row.vertical-center-box.vertical-center-box-tablet
+                .text-left.col-xs-3.mar-bot-15
+                  label.label.bg-blue
+                    | 50% 
+                    i.fa.fa-level-up(aria-hidden='true')
+                .col-xs-9.cus-gh-hd-pro
+                  h2.text-right.no-margin $70,000
+              .progress.progress-mini
+                .progress-bar.bg-blue(style='width: 60%;')
+          .col-lg-3.col-md-3.col-sm-3.col-xs-12
+            .admin-content.analysis-progrebar-ctn.res-mg-t-30
+              h4.text-left.text-uppercase
+                b Bán hàng năm
+              .row.vertical-center-box.vertical-center-box-tablet
+                .text-left.col-xs-3.mar-bot-15
+                  label.label.bg-purple
+                    | 80% 
+                    i.fa.fa-level-up(aria-hidden='true')
+                .col-xs-9.cus-gh-hd-pro
+                  h2.text-right.no-margin $100,000
+              .progress.progress-mini
+                .progress-bar.bg-purple(style='width: 60%;')
+  .product-sales-area.mg-tb-30
+    .container-fluid
+      .row
+        .col-lg-9.col-md-9.col-sm-9.col-xs-12
+          .product-sales-chart
+            .portlet-title
+              .row
+                .col-lg-6.col-md-6.col-sm-6.col-xs-12
+                  .caption.pro-sl-hd
+                    span.caption-subject.text-uppercase
+                      b Bán sản phầm
+                .col-lg-6.col-md-6.col-sm-6.col-xs-12
+                  .actions.graph-rp
+                    .btn-group(data-toggle='buttons')
+                      label.btn.btn-grey.active
+                        input#option1.toggle(type='radio', name='options', checked='')
+                        | Hôm nay
+                      label.btn.btn-grey
+                        input#option2.toggle(type='radio', name='options')
+                        | Trong tuần
+            #curved-line-chart.flot-chart-sts.flot-chart.curved-chart-statistic
+        .col-lg-3.col-md-3.col-sm-3.col-xs-12
+          .white-box.analytics-info-cs.mg-b-30.res-mg-t-30
+            h3.box-title Tổng lượt truy cập
+            ul.list-inline.two-part-sp
+              li
+                #sparklinedash
+              li.text-right.sp-cn-r
+                i.fa.fa-level-up(aria-hidden='true')
+                span.counter.sales-sts-ctn 8659
+          .white-box.analytics-info-cs.mg-b-30
+            h3.box-title Tổng lượt xem
+            ul.list-inline.two-part-sp
+              li
+                #sparklinedash2
+              li.text-right
+                i.fa.fa-level-up(aria-hidden='true')
+                span.counter.sales-sts-ctn 7469
+          .white-box.analytics-info-cs.mg-b-30
+            h3.box-title Khách truy cập duy nhất
+            ul.list-inline.two-part-sp
+              li
+                #sparklinedash3
+              li.text-right
+                i.fa.fa-level-up(aria-hidden='true')
+                span.counter.sales-sts-ctn 6011
+          .white-box.analytics-info-cs
+            h3.box-title Tỷ lệ thoát
+            ul.list-inline.two-part-sp
+              li
+                #sparklinedash4
+              li.text-right
+                i.fa.fa-level-down(aria-hidden='true')
+                span.sales-sts-ctn 18%

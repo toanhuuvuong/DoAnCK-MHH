@@ -1,0 +1,72 @@
+extends layout
+
+block content
+  .breadcome-area
+    .container-fluid
+      .row
+        .col-lg-12.col-md-12.col-sm-12.col-xs-12
+          .breadcome-list
+            .row
+              .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                .breadcomb-wp
+                  .breadcomb-icon
+                    i.icon.nalika-home
+                  .breadcomb-ctn
+                    h2 Sửa tài khoản
+              .col-lg-6.col-md-6.col-sm-6.col-xs-6
+                .breadcomb-report
+                  button.btn(data-toggle='tooltip', data-placement='left', title='Tải báo cáo')
+                    i.icon.nalika-download
+  .single-product-tab-area.mg-b-30
+    .single-pro-review-area
+      .container-fluid
+        .row
+          .col-lg-12.col-md-12.col-sm-12.col-xs-12
+            .review-tab-pro-inner
+              ul#myTab3.tab-review-design
+                li.active
+                  a(href='#description')
+                    i.icon.nalika-edit(aria-hidden='true')
+                    |  Thông tin tài khoản
+              #myTabContent.tab-content.custom-product-edit
+                #description.product-tab-list.tab-pane.fade.active.in
+                  .row
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                        form(action='#', method='POST')
+                          if success_msg!=''
+                            .alert.alert-success
+                              | #{success_msg}
+                          .input-group.mg-b-pro-edt
+                            span.input-group-addon
+                              i.icon.nalika-edit(aria-hidden='true')
+                            input.form-control(type='email', placeholder='Email', value=user.email, disabled=true, style='background-color: black;')
+                          .input-group.mg-b-pro-edt
+                            span.input-group-addon
+                              i.icon.nalika-edit(aria-hidden='true')
+                            input.form-control(type='text', placeholder='Họ tên', value=user.name, disabled=true, style='background-color: black;')
+                          .input-group.mg-b-pro-edt
+                            span.input-group-addon
+                              i.icon.nalika-edit(aria-hidden='true')
+                            input.form-control(type='tel', placeholder='Số điện thoại', value=user.phone, disabled=true, style='background-color: black;')
+                          .input-group.mg-b-pro-edt
+                            span.input-group-addon
+                              i.icon.nalika-edit(aria-hidden='true')
+                            - var gender = "Nam";
+                            if user.gender == 'female'
+                              - gender = 'Nữ';
+                            else if user.gender == 'other'
+                              - gender = 'Khác';
+                            input.form-control(type='tel', placeholder='Giới tính', value=gender, disabled=true, style='background-color: black;')
+                          .input-group.mg-b-pro-edt
+                            span.input-group-addon
+                              i.icon.nalika-edit(aria-hidden='true')
+                            input.form-control(type='date', placeholder='Ngày sinh', value=user.birth, disabled=true, style='background-color: black;')
+                          .input-group.mg-b-pro-edt(style='color: white;')
+                            input.form-group(type='radio', name='didDelete', value='true', checked=(user.didDelete) ? true : false, disabled=(user.email==currentEmail)?true:false)
+                            | &nbsp;&nbsp;Khoá
+                            br
+                            input.form-group(type='radio', name='didDelete', value='false', checked=(!user.didDelete) ? true : false, disabled=(user.email==currentEmail)?true:false) 
+                            | &nbsp;&nbsp;Mở
+                          .text-center.custom-pro-edt-ds
+                            button.btn.btn-ctl-bt.waves-effect.waves-light.m-r-10(type='submit', value='submit')
+                              | Cập nhật
